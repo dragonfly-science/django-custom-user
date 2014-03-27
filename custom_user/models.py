@@ -33,6 +33,8 @@ class EmailUserManager(BaseUserManager):
         return self._create_user(email, password, True, True,
                                  **extra_fields)
 
+    def get_by_natural_key(self, username):
+        return self.get(email__iexact=username)
 
 class AbstractEmailUser(AbstractBaseUser, PermissionsMixin):
     """

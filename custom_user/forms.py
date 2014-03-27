@@ -29,7 +29,7 @@ class EmailUserCreationForm(forms.ModelForm):
         # but it sets a nicer error message than the ORM. See #13147.
         email = self.cleaned_data["email"]
         try:
-            get_user_model()._default_manager.get(email=email)
+            get_user_model()._default_manager.get(email__iexact=email)
         except get_user_model().DoesNotExist:
             return email
         raise forms.ValidationError(
